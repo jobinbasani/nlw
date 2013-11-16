@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Next Long Weekend</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string-array name="countryArray">
+        <item >USA</item>
+        <item >Canada</item>
+        <item >UK</item>
+    </string-array>
+    <string name="nlwText">Next Long Weekend in</string>
+
+</resources>

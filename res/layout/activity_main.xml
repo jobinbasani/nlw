@@ -22,7 +22,7 @@
         <Spinner
             android:id="@+id/countrySelector"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="false"
             android:layout_alignTop="@+id/nlwLabel"
             android:layout_toRightOf="@id/nlwLabel"

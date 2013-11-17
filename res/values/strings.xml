@@ -9,5 +9,6 @@
         <item >USA</item>
     </string-array>
     <string name="nlwText">Next Long Weekend in</string>
+    <string name="dottedLineDescr">Dotted Line</string>
 
 </resources>

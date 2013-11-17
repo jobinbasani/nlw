@@ -13,6 +13,14 @@
         android:text="November 2013"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <ImageView
+        android:id="@+id/monthBottomLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/monthYearText"
+        android:contentDescription="@string/dottedLineDescr"
+        android:src="@layout/dotted" />
+
     <TextView
         android:id="@+id/nlwDateText"
         android:layout_width="wrap_content"
@@ -32,5 +40,21 @@
         android:gravity="center"
         android:text="Columbus Day"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/holidayBottomLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nlwHolidayText"
+        android:contentDescription="@string/dottedLineDescr"
+        android:src="@layout/dotted" />
+
+    <ImageView
+        android:id="@+id/dateBottomLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nlwDateText"
+        android:contentDescription="@string/dottedLineDescr"
+        android:src="@layout/dotted" />
 
 </RelativeLayout>

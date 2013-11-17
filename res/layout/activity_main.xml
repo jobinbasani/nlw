@@ -28,4 +28,12 @@
             android:layout_toRightOf="@id/nlwLabel"
             android:entries="@array/countryArray" />
 
+        <fragment
+            android:id="@+id/nlwBlockFragment"
+            android:name="com.jobinbasani.nlw.fragments.NlwInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nlwLabel"
+            android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

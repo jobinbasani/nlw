@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/monthYearText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="November 2013"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/nlwDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/monthYearText"
+        android:layout_centerHorizontal="true"
+        android:text="31"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="@dimen/nlwDateSize" />
+
+    <TextView
+        android:id="@+id/nlwHolidayText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nlwDateText"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Columbus Day"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

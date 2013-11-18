@@ -10,16 +10,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:padding="@dimen/nlwPadding"
         android:text="November 2013"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <ImageView
-        android:id="@+id/monthBottomLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/monthYearText"
-        android:contentDescription="@string/dottedLineDescr"
-        android:src="@layout/dotted" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/whiteColor" />
 
     <TextView
         android:id="@+id/nlwDateText"
@@ -27,9 +21,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/monthYearText"
         android:layout_centerHorizontal="true"
+        android:background="@layout/circle"
+        android:gravity="center"
+        android:height="@dimen/nlwCircleRadius"
+        android:padding="@dimen/nlwPadding"
         android:text="31"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="@dimen/nlwDateSize" />
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/nlwDateSize"
+        android:width="@dimen/nlwCircleRadius" />
 
     <TextView
         android:id="@+id/nlwHolidayText"
@@ -38,22 +38,16 @@
         android:layout_below="@+id/nlwDateText"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:padding="@dimen/nlwPadding"
         android:text="Columbus Day"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/whiteColor" />
 
     <ImageView
         android:id="@+id/holidayBottomLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nlwHolidayText"
-        android:contentDescription="@string/dottedLineDescr"
-        android:src="@layout/dotted" />
-
-    <ImageView
-        android:id="@+id/dateBottomLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nlwDateText"
         android:contentDescription="@string/dottedLineDescr"
         android:src="@layout/dotted" />
 

@@ -17,5 +17,8 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     <color name="bgGreenColor">#79b433</color>
+    <color name="bgOrange">#fdb747</color>
+    <color name="redColor">#b70000</color>
+    <color name="whiteColor">#ffffff</color>
 
 </resources>

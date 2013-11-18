@@ -1,5 +1,7 @@
 package com.jobinbasani.nlw;
 
+import java.util.Calendar;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
@@ -19,7 +22,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		prefs = getPreferences(MODE_PRIVATE);
-		init();
+		setCountrySelectionListener();
 		loadPreferences();
 	}
 
@@ -45,7 +48,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	private void init(){
+	private void setCountrySelectionListener(){
 		final Spinner countrySpinner = (Spinner) findViewById(R.id.countrySelector);
 		countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -55,6 +58,7 @@ public class MainActivity extends Activity {
 				SharedPreferences.Editor editor = prefs.edit();
 				editor.putString(COUNTRY_KEY, countrySpinner.getSelectedItem().toString());
 				editor.commit();
+				loadNextLongWeekend();
 			}
 
 			@Override
@@ -62,6 +66,17 @@ public class MainActivity extends Activity {
 				
 			}
 		});
+	}
+	
+	private void loadNextLongWeekend(){
+		Calendar rightNow = Calendar.getInstance();
+		
+		TextView monthYearText = (TextView) findViewById(R.id.monthYearText);
+		TextView holidayText = (TextView) findViewById(R.id.nlwHolidayText);
+		TextView nlwDateText = (TextView) findViewById(R.id.nlwDateText);
+		monthYearText.setText("December 2013");
+		holidayText.setText("Remembrance Day");
+		nlwDateText.setText(rightNow.get(Calendar.DAY_OF_MONTH)+"");
 	}
 
 }

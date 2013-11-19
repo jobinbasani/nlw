@@ -1,5 +1,6 @@
 package com.jobinbasani.nlw.util;
 
+import com.jobinbasani.nlw.R;
 import com.jobinbasani.nlw.sql.NlwDataDbHelper;
 
 import android.content.Context;
@@ -26,6 +27,8 @@ public class NlwUtil {
 	public static void loadInitialData(){
 		NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(nlwContext);
 		SQLiteDatabase db = nlwDbHelper.getWritableDatabase();
+		String[] nlwData = nlwContext.getResources().getStringArray(R.array.nlwData);
+		
 	}
 
 }

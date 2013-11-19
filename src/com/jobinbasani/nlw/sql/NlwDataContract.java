@@ -12,6 +12,7 @@ public final class NlwDataContract  {
         public static final String COLUMN_NAME_NLWNAME = "name";
         public static final String COLUMN_NAME_NLWTEXT = "text";
         public static final String COLUMN_NAME_NLWWIKI = "wiki";
+        public static final String COLUMN_NAME_NLWCOUNTRY = "country";
     }
 
 }

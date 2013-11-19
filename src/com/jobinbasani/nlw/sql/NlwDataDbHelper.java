@@ -15,6 +15,7 @@ public class NlwDataDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
         "CREATE TABLE " + NlwDataEntry.TABLE_NAME + " (" +
         		NlwDataEntry._ID + " INTEGER PRIMARY KEY," +
+        		NlwDataEntry.COLUMN_NAME_NLWCOUNTRY + TEXT_TYPE + COMMA_SEP +
         		NlwDataEntry.COLUMN_NAME_NLWNAME + TEXT_TYPE + COMMA_SEP +
         		NlwDataEntry.COLUMN_NAME_NLWWIKI + TEXT_TYPE + COMMA_SEP +
         		NlwDataEntry.COLUMN_NAME_NLWTEXT + TEXT_TYPE + 

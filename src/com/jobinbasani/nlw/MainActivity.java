@@ -2,9 +2,15 @@ package com.jobinbasani.nlw;
 
 import java.util.Calendar;
 
+import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
+import com.jobinbasani.nlw.sql.NlwDataDbHelper;
+import com.jobinbasani.nlw.util.NlwUtil;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +27,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		try {
+			NlwUtil.getInstance(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		prefs = getPreferences(MODE_PRIVATE);
 		setCountrySelectionListener();
 		loadPreferences();
@@ -74,9 +85,38 @@ public class MainActivity extends Activity {
 		TextView monthYearText = (TextView) findViewById(R.id.monthYearText);
 		TextView holidayText = (TextView) findViewById(R.id.nlwHolidayText);
 		TextView nlwDateText = (TextView) findViewById(R.id.nlwDateText);
+		int currentDateNumber = getCurrentDateNumber();
 		monthYearText.setText("December 2013");
-		holidayText.setText("Remembrance Day");
-		nlwDateText.setText(rightNow.get(Calendar.DAY_OF_MONTH)+"");
+		
+		nlwDateText.setText(rightNow.get(Calendar.MONTH)+"");
+		
+		NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(this);
+		SQLiteDatabase db = nlwDbHelper.getReadableDatabase();
+		
+		String[] projection = {
+			    NlwDataEntry._ID,
+			    NlwDataEntry.COLUMN_NAME_NLWNAME,
+			    NlwDataEntry.COLUMN_NAME_NLWTEXT
+			    };
+		
+		Cursor cursor = db.query(NlwDataEntry.TABLE_NAME, projection, null, null, null, null, null);
+		
+		//Cursor cursor = db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE _ID>? ORDER BY _ID LIMIT 1", new String[]{currentDateNumber+""});
+		cursor.moveToFirst();
+		String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
+		holidayText.setText(holiday);
+		
+		db.close();
+	}
+	
+	private int getCurrentDateNumber(){
+		Calendar rightNow = Calendar.getInstance();
+		int year, month, day;
+		
+		year = Integer.parseInt((rightNow.get(Calendar.YEAR)+"").substring(2, 4))*10000;
+		month = (rightNow.get(Calendar.MONTH)+1)*100;
+		day = rightNow.get(Calendar.DATE);
+		return year+month+day;
 	}
 
 }

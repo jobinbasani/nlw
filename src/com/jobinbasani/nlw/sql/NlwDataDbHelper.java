@@ -1,6 +1,7 @@
 package com.jobinbasani.nlw.sql;
 
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
+import com.jobinbasani.nlw.util.NlwUtil;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,6 +31,12 @@ public class NlwDataDbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SQL_CREATE_ENTRIES);
+		try {
+			NlwUtil.getInstance(null);
+			NlwUtil.loadInitialData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

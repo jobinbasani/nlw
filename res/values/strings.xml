@@ -13,7 +13,14 @@
     <string name="dottedLineDescr">Dotted Line</string>
     <string-array name="nlwData">
         <item >131225~Canada~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
-        <item >131226~Canada~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day</item>
+        <item >131226~Canada~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day.Observed in Ontario</item>
+        <item >140101~Canada~Family Day~https://en.wikipedia.org/wiki/Family_Day_(Canada)~A statutory holiday occurring on a Monday in February. Observed in Alberta, Ontario, PEI and Saskatchewan</item>
+        <item >131128~USA~Thanksgiving Day~https://en.wikipedia.org/wiki/Thanksgiving_(United_States)~Holiday celebrated in the United States on the fourth Thursday in November</item>
+        <item >131225~USA~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
+        <item >131225~Australia~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
+        <item >131226~Australia~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day</item>
+        <item >131225~UK~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
+        <item >131226~UK~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day</item>
     </string-array>
 
 </resources>

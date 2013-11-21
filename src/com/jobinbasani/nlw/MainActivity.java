@@ -7,12 +7,10 @@ import com.jobinbasani.nlw.sql.NlwDataDbHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -80,50 +78,22 @@ public class MainActivity extends Activity {
 	}
 	
 	private void loadNextLongWeekend(){
-		Calendar rightNow = Calendar.getInstance();
 		
 		TextView monthYearText = (TextView) findViewById(R.id.monthYearText);
 		TextView holidayText = (TextView) findViewById(R.id.nlwHolidayText);
 		TextView nlwDateText = (TextView) findViewById(R.id.nlwDateText);
+		Spinner countrySelector = (Spinner) findViewById(R.id.countrySelector);
 		int currentDateNumber = getCurrentDateNumber();
-		monthYearText.setText("December 2013");
-		
-		nlwDateText.setText(rightNow.get(Calendar.MONTH)+"");
+		String selectedCountry = countrySelector.getSelectedItem().toString();
+		String[] selectionArgs = new String[]{currentDateNumber+"", selectedCountry};
 		
 		NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(NLW_CONTEXT);
 		SQLiteDatabase db = nlwDbHelper.getWritableDatabase();
 		
-		Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM "+NlwDataEntry.TABLE_NAME,null);
-		cursor.moveToFirst();
-		monthYearText.setText(cursor.getCount()+"");
-		if(cursor.getCount()<=1){
-				String[] nlwData = getResources().getStringArray(R.array.nlwData);
-				
-				for(int i=0;i<nlwData.length;i++){
-					String[] nlwDetails = nlwData[i].split("~");
-					Log.d("str", nlwDetails.length+"");
-					if(nlwDetails.length == 5){
-						ContentValues values = new ContentValues();
-						values.put(NlwDataEntry._ID, nlwDetails[0]);
-						values.put(NlwDataEntry.COLUMN_NAME_NLWCOUNTRY, nlwDetails[1]);
-						values.put(NlwDataEntry.COLUMN_NAME_NLWNAME, nlwDetails[2]);
-						values.put(NlwDataEntry.COLUMN_NAME_NLWWIKI, nlwDetails[3]);
-						values.put(NlwDataEntry.COLUMN_NAME_NLWTEXT, nlwDetails[4]);
-
-						db.insert(
-								NlwDataEntry.TABLE_NAME,
-						         null,
-						         values);
-					}
-					
-				}
-		}
-		cursor.close();
-		
-		cursor = db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE _ID>? ORDER BY _ID LIMIT 1", new String[]{currentDateNumber+""});
+		Cursor cursor = db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE "+NlwDataEntry.COLUMN_NAME_NLWDATE+">? AND "+NlwDataEntry.COLUMN_NAME_NLWCOUNTRY+"=? ORDER BY _ID LIMIT 1", selectionArgs);
 		cursor.moveToFirst();
 		if(cursor.getCount()>0){
-			int dateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry._ID)));
+			int dateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWDATE)));
 			String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
 			int year = dateNumber/10000;
 			int month = (dateNumber-(year*10000))/100;

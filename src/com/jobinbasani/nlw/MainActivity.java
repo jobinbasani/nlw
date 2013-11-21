@@ -4,13 +4,15 @@ import java.util.Calendar;
 
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
 import com.jobinbasani.nlw.sql.NlwDataDbHelper;
-import com.jobinbasani.nlw.util.NlwUtil;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,16 +24,14 @@ public class MainActivity extends Activity {
 	
 	SharedPreferences prefs;
 	final public static String COUNTRY_KEY = "country";
+	public static Context NLW_CONTEXT;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		try {
-			NlwUtil.getInstance(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		NLW_CONTEXT = this;
+		
 		prefs = getPreferences(MODE_PRIVATE);
 		setCountrySelectionListener();
 		loadPreferences();
@@ -90,22 +90,53 @@ public class MainActivity extends Activity {
 		
 		nlwDateText.setText(rightNow.get(Calendar.MONTH)+"");
 		
-		NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(this);
-		SQLiteDatabase db = nlwDbHelper.getReadableDatabase();
+		NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(NLW_CONTEXT);
+		SQLiteDatabase db = nlwDbHelper.getWritableDatabase();
 		
-		String[] projection = {
-			    NlwDataEntry._ID,
-			    NlwDataEntry.COLUMN_NAME_NLWNAME,
-			    NlwDataEntry.COLUMN_NAME_NLWTEXT
-			    };
-		
-		Cursor cursor = db.query(NlwDataEntry.TABLE_NAME, projection, null, null, null, null, null);
-		
-		//Cursor cursor = db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE _ID>? ORDER BY _ID LIMIT 1", new String[]{currentDateNumber+""});
+		Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM "+NlwDataEntry.TABLE_NAME,null);
 		cursor.moveToFirst();
-		String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
-		holidayText.setText(holiday);
+		monthYearText.setText(cursor.getCount()+"");
+		if(cursor.getCount()<=1){
+				String[] nlwData = getResources().getStringArray(R.array.nlwData);
+				
+				for(int i=0;i<nlwData.length;i++){
+					String[] nlwDetails = nlwData[i].split("~");
+					Log.d("str", nlwDetails.length+"");
+					if(nlwDetails.length == 5){
+						ContentValues values = new ContentValues();
+						values.put(NlwDataEntry._ID, nlwDetails[0]);
+						values.put(NlwDataEntry.COLUMN_NAME_NLWCOUNTRY, nlwDetails[1]);
+						values.put(NlwDataEntry.COLUMN_NAME_NLWNAME, nlwDetails[2]);
+						values.put(NlwDataEntry.COLUMN_NAME_NLWWIKI, nlwDetails[3]);
+						values.put(NlwDataEntry.COLUMN_NAME_NLWTEXT, nlwDetails[4]);
+
+						db.insert(
+								NlwDataEntry.TABLE_NAME,
+						         null,
+						         values);
+					}
+					
+				}
+		}
+		cursor.close();
 		
+		cursor = db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE _ID>? ORDER BY _ID LIMIT 1", new String[]{currentDateNumber+""});
+		cursor.moveToFirst();
+		if(cursor.getCount()>0){
+			int dateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry._ID)));
+			String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
+			int year = dateNumber/10000;
+			int month = (dateNumber-(year*10000))/100;
+			int date = dateNumber-(year*10000)-(month*100);
+			String monthName = getMonthName(month);
+			year = 2000+year;
+			
+			monthYearText.setText(monthName+" "+year);
+			nlwDateText.setText(date+"");
+			holidayText.setText(holiday);
+			
+		}
+		cursor.close();
 		db.close();
 	}
 	
@@ -117,6 +148,49 @@ public class MainActivity extends Activity {
 		month = (rightNow.get(Calendar.MONTH)+1)*100;
 		day = rightNow.get(Calendar.DATE);
 		return year+month+day;
+	}
+	
+	private String getMonthName(int month){
+		String monthName = "";
+		switch(month){
+		case 1:
+			monthName = "January";
+			break;
+		case 2:
+			monthName = "February";
+			break;
+		case 3:
+			monthName = "March";
+			break;
+		case 4:
+			monthName = "April";
+			break;
+		case 5:
+			monthName = "May";
+			break;
+		case 6:
+			monthName = "June";
+			break;
+		case 7:
+			monthName = "July";
+			break;
+		case 8:
+			monthName = "August";
+			break;
+		case 9:
+			monthName = "September";
+			break;
+		case 10:
+			monthName = "October";
+			break;
+		case 11:
+			monthName = "November";
+			break;
+		case 12:
+			monthName = "December";
+			break;
+		}
+		return monthName;
 	}
 
 }

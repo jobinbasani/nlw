@@ -47,8 +47,9 @@
 	            android:layout_height="29dp"
 	            android:layout_alignParentLeft="true"
 	            android:layout_below="@id/nlwBlockFragment"
+	            android:layout_marginTop="@dimen/nlwTopMargin"
 	            android:background="@layout/buttonshape"
-	            android:text="View All"
+	            android:text="@string/viewAll"
 	            android:textColor="#FFFFFF"
 	            android:textSize="17sp" />
 	        
@@ -58,8 +59,10 @@
 	            android:layout_height="29dp"
 	            android:layout_alignParentRight="true"
 	            android:layout_below="@id/nlwBlockFragment"
+	            android:layout_marginTop="@dimen/nlwTopMargin"
 	            android:background="@layout/buttonshape"
-	            android:text="Read More"
+	            android:onClick="onReadMore"
+	            android:text="@string/readMore"
 	            android:textColor="#FFFFFF"
 	            android:textSize="17sp" />
 	

@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 	final public static String COUNTRY_KEY = "country";
 	public static Context NLW_CONTEXT;
 	private int nlwDateNumber;
+	private String readMoreLink;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,13 @@ public class MainActivity extends Activity {
 		});
 	}
 	
+	public void onReadMore(View view){
+		if(readMoreLink!=null){
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(readMoreLink));
+			startActivity(browserIntent);
+		}
+	}
+	
 	private void setCountrySelectionListener(){
 		final Spinner countrySpinner = (Spinner) findViewById(R.id.countrySelector);
 		countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,6 +135,7 @@ public class MainActivity extends Activity {
 		cursor.moveToFirst();
 		if(cursor.getCount()>0){
 			nlwDateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWDATE)));
+			readMoreLink = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWWIKI));
 			String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
 			String holidayDetailText = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWTEXT));
 			int year = nlwDateNumber/10000;

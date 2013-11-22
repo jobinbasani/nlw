@@ -48,4 +48,22 @@
         android:contentDescription="@string/dottedLineDescr"
         android:src="@layout/dotted" />
 
+    <TextView
+        android:id="@+id/holidayDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/holidayBottomLine"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/nlwPadding"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/whiteColor" />
+    
+    <ImageView
+        android:id="@+id/holidayTextBottomLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/holidayDetails"
+        android:contentDescription="@string/dottedLineDescr"
+        android:src="@layout/dotted" />
+
 </RelativeLayout>

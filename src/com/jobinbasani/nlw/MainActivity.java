@@ -46,6 +46,9 @@ public class MainActivity extends Activity {
 		String defaultCountry = prefs.getString(COUNTRY_KEY, "USA");
 		Spinner countrySpinner = (Spinner) findViewById(R.id.countrySelector);
 		SpinnerAdapter countryArray = countrySpinner.getAdapter();
+		if(defaultCountry.equals(countrySpinner.getSelectedItem().toString())){
+			loadNextLongWeekend();
+		}
 		int position = -1;
 		for(int i=0;i<countryArray.getCount();i++){
 			if(countryArray.getItem(i).toString().equalsIgnoreCase(defaultCountry)){
@@ -80,10 +83,10 @@ public class MainActivity extends Activity {
 	
 	private void loadNextLongWeekend() {
 		
-		
 		TextView monthYearText = (TextView) findViewById(R.id.monthYearText);
 		TextView holidayText = (TextView) findViewById(R.id.nlwHolidayText);
 		TextView nlwDateText = (TextView) findViewById(R.id.nlwDateText);
+		TextView holidayDetails = (TextView) findViewById(R.id.holidayDetails);
 		Spinner countrySelector = (Spinner) findViewById(R.id.countrySelector);
 		int currentDateNumber = getCurrentDateNumber();
 		String selectedCountry = countrySelector.getSelectedItem().toString();
@@ -97,6 +100,7 @@ public class MainActivity extends Activity {
 		if(cursor.getCount()>0){
 			int dateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWDATE)));
 			String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
+			String holidayDetailText = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWTEXT));
 			int year = dateNumber/10000;
 			int month = (dateNumber-(year*10000))/100;
 			int date = dateNumber-(year*10000)-(month*100);
@@ -106,6 +110,7 @@ public class MainActivity extends Activity {
 			monthYearText.setText(monthName+" "+year);
 			nlwDateText.setText(date+"");
 			holidayText.setText(holiday);
+			holidayDetails.setText(holidayDetailText);
 			
 		}
 		cursor.close();

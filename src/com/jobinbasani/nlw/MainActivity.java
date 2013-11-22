@@ -8,6 +8,7 @@ import com.jobinbasani.nlw.sql.NlwDataDbHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -171,6 +172,18 @@ public class MainActivity extends Activity {
 	}
 	
 	private class DatabaseLoaderTask extends AsyncTask<Void, Void, Void>{
+		
+		private ProgressDialog pDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Loading ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -182,6 +195,7 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
+			pDialog.dismiss();
 			setCountrySelectionListener();
 			loadPreferences();
 		}

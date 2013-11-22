@@ -5,6 +5,7 @@ import java.util.Calendar;
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
 import com.jobinbasani.nlw.sql.NlwDataDbHelper;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -31,8 +32,8 @@ public class MainActivity extends Activity {
 		NLW_CONTEXT = this;
 		
 		prefs = getPreferences(MODE_PRIVATE);
-		setCountrySelectionListener();
-		loadPreferences();
+		
+		new DatabaseLoaderTask().execute();
 	}
 
 	@Override
@@ -77,7 +78,8 @@ public class MainActivity extends Activity {
 		});
 	}
 	
-	private void loadNextLongWeekend(){
+	private void loadNextLongWeekend() {
+		
 		
 		TextView monthYearText = (TextView) findViewById(R.id.monthYearText);
 		TextView holidayText = (TextView) findViewById(R.id.nlwHolidayText);
@@ -161,6 +163,24 @@ public class MainActivity extends Activity {
 			break;
 		}
 		return monthName;
+	}
+	
+	private class DatabaseLoaderTask extends AsyncTask<Void, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(NLW_CONTEXT);
+			SQLiteDatabase db = nlwDbHelper.getWritableDatabase(); //Creates or inserts initial data asynchronously
+			db.close();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			setCountrySelectionListener();
+			loadPreferences();
+		}
+		
 	}
 
 }

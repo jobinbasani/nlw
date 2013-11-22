@@ -1,15 +1,19 @@
 package com.jobinbasani.nlw;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
 import com.jobinbasani.nlw.sql.NlwDataDbHelper;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,6 +29,7 @@ public class MainActivity extends Activity {
 	SharedPreferences prefs;
 	final public static String COUNTRY_KEY = "country";
 	public static Context NLW_CONTEXT;
+	private int nlwDateNumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,28 @@ public class MainActivity extends Activity {
 		if(position>=0){
 			countrySpinner.setSelection(position);
 		}
+	}
+	
+	private void setNlwDateCLickListener(){
+		TextView nlwDateText = (TextView) findViewById(R.id.nlwDateText);
+		nlwDateText.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int year = nlwDateNumber/10000;
+				int month = (nlwDateNumber-(year*10000))/100;
+				int date = nlwDateNumber-(year*10000)-(month*100);
+				year = 2000+year;
+				month--;
+				Calendar cal = new GregorianCalendar(year, month, date);
+				long time = cal.getTime().getTime();
+				Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+				builder.appendPath("time");
+				builder.appendPath(Long.toString(time));
+				Intent calendarIntent = new Intent(Intent.ACTION_VIEW,builder.build());
+				startActivity(calendarIntent);
+			}
+		});
 	}
 	
 	private void setCountrySelectionListener(){
@@ -99,12 +126,12 @@ public class MainActivity extends Activity {
 		Cursor cursor = db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE "+NlwDataEntry.COLUMN_NAME_NLWDATE+">? AND "+NlwDataEntry.COLUMN_NAME_NLWCOUNTRY+"=? ORDER BY _ID LIMIT 1", selectionArgs);
 		cursor.moveToFirst();
 		if(cursor.getCount()>0){
-			int dateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWDATE)));
+			nlwDateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWDATE)));
 			String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
 			String holidayDetailText = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWTEXT));
-			int year = dateNumber/10000;
-			int month = (dateNumber-(year*10000))/100;
-			int date = dateNumber-(year*10000)-(month*100);
+			int year = nlwDateNumber/10000;
+			int month = (nlwDateNumber-(year*10000))/100;
+			int date = nlwDateNumber-(year*10000)-(month*100);
 			String monthName = getMonthName(month);
 			year = 2000+year;
 			
@@ -197,6 +224,7 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			pDialog.dismiss();
 			setCountrySelectionListener();
+			setNlwDateCLickListener();
 			loadPreferences();
 		}
 		

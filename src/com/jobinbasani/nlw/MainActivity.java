@@ -17,7 +17,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 	public static Context NLW_CONTEXT;
 	private int nlwDateNumber;
 	private String readMoreLink;
+	private ShareActionProvider mShareActionProvider;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,9 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		MenuItem shareItem = menu.findItem(R.id.shareMenuItem);
+		mShareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
@@ -63,6 +66,9 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.feedbackMenuItem:
 			sendFeedback();
+			break;
+		case R.id.shareMenuItem:
+			shareNlwDetails();
 			break;
 		}
 		
@@ -121,8 +127,7 @@ public class MainActivity extends Activity {
 		Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+getResources().getString(R.string.feedbackEmail)+"?subject="+Uri.encode("NLW Feedback")));
 		emailIntent.putExtra(Intent.EXTRA_SUBJECT, "NLW Feedback");
 		
-		PackageManager pkManager = getPackageManager();
-		List<ResolveInfo> activities = pkManager.queryIntentActivities(emailIntent, 0);
+		List<ResolveInfo> activities = getPackageManager().queryIntentActivities(emailIntent, 0);
 		//To prevent Receiver leak bug when only application is available for Intent
 		if (activities.size() > 1) {
 		    // Create and start the chooser
@@ -131,6 +136,20 @@ public class MainActivity extends Activity {
 
 		  } else {
 		    startActivity( emailIntent );
+		}
+	}
+	
+	private void shareNlwDetails(){
+		if(mShareActionProvider != null){
+			TextView holidayText = (TextView)findViewById(R.id.nlwHolidayText);
+			TextView holidayDate = (TextView) findViewById(R.id.nlwDateText);
+			TextView holidayMonth = (TextView) findViewById(R.id.monthYearText);
+			String[] holidayMonthArray = holidayMonth.getText().toString().split(" ");
+			Intent shareIntent = new Intent();
+			shareIntent.setAction(Intent.ACTION_SEND);
+			shareIntent.putExtra(Intent.EXTRA_TEXT, holidayText.getText()+" on "+holidayMonthArray[0]+" "+holidayDate.getText()+", "+holidayMonthArray[1]+". Read more at "+readMoreLink);
+			shareIntent.setType("text/plain");
+			mShareActionProvider.setShareIntent(shareIntent);
 		}
 	}
 	

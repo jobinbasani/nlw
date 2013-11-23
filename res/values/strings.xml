@@ -44,5 +44,8 @@
     </string-array>
     <string name="readMore">Read More</string>
     <string name="viewAll">View All</string>
+    <string name="addEventAction">Add Event</string>
+    <string name="shareAction">Share</string>
+    <string name="feedbackAction">Feedback</string>
 
 </resources>

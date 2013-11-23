@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -49,6 +51,18 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch(item.getItemId()){
+		case R.id.eventMenuItem:
+			addNlwEvent();
+			break;
+		}
+		
+		return true;
+	}
+
 	private void loadPreferences(){
 		String defaultCountry = prefs.getString(COUNTRY_KEY, "USA");
 		Spinner countrySpinner = (Spinner) findViewById(R.id.countrySelector);
@@ -74,12 +88,8 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				int year = nlwDateNumber/10000;
-				int month = (nlwDateNumber-(year*10000))/100;
-				int date = nlwDateNumber-(year*10000)-(month*100);
-				year = 2000+year;
-				month--;
-				Calendar cal = new GregorianCalendar(year, month, date);
+				
+				Calendar cal = getCalendarObject();
 				long time = cal.getTime().getTime();
 				Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
 				builder.appendPath("time");
@@ -88,6 +98,26 @@ public class MainActivity extends Activity {
 				startActivity(calendarIntent);
 			}
 		});
+	}
+	
+	private void addNlwEvent(){
+		
+		Calendar cal = getCalendarObject();
+		Intent calendarIntent = new Intent(Intent.ACTION_INSERT);
+		calendarIntent.setData(Events.CONTENT_URI);
+		calendarIntent.putExtra(Events.ALL_DAY, true);
+		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTime().getTime());
+		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTime().getTime()+600000);
+		startActivity(calendarIntent);
+	}
+	
+	private Calendar getCalendarObject(){
+		int year = nlwDateNumber/10000;
+		int month = (nlwDateNumber-(year*10000))/100;
+		int date = nlwDateNumber-(year*10000)-(month*100);
+		year = 2000+year;
+		month--;
+		return new GregorianCalendar(year, month, date);
 	}
 	
 	public void onReadMore(View view){

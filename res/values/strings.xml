@@ -47,5 +47,6 @@
     <string name="addEventAction">Add Event</string>
     <string name="shareAction">Share</string>
     <string name="feedbackAction">Feedback</string>
+    <string name="feedbackEmail">jobinbasani@live.com</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.jobinbasani.nlw;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
 import com.jobinbasani.nlw.sql.NlwDataDbHelper;
@@ -16,6 +17,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
@@ -57,6 +60,9 @@ public class MainActivity extends Activity {
 		switch(item.getItemId()){
 		case R.id.eventMenuItem:
 			addNlwEvent();
+			break;
+		case R.id.feedbackMenuItem:
+			sendFeedback();
 			break;
 		}
 		
@@ -109,6 +115,23 @@ public class MainActivity extends Activity {
 		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTime().getTime());
 		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTime().getTime()+600000);
 		startActivity(calendarIntent);
+	}
+	
+	private void sendFeedback(){
+		Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+getResources().getString(R.string.feedbackEmail)+"?subject="+Uri.encode("NLW Feedback")));
+		emailIntent.putExtra(Intent.EXTRA_SUBJECT, "NLW Feedback");
+		
+		PackageManager pkManager = getPackageManager();
+		List<ResolveInfo> activities = pkManager.queryIntentActivities(emailIntent, 0);
+		//To prevent Receiver leak bug when only application is available for Intent
+		if (activities.size() > 1) {
+		    // Create and start the chooser
+		    Intent chooser = Intent.createChooser(emailIntent, "Send Feedback");
+		    startActivity(chooser);
+
+		  } else {
+		    startActivity( emailIntent );
+		}
 	}
 	
 	private Calendar getCalendarObject(){

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
 import com.jobinbasani.nlw.sql.NlwDataDbHelper;
+import com.jobinbasani.nlw.util.NlwUtil;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -169,6 +170,11 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	public void onViewAll(View view){
+		Intent viewAllIntent = new Intent(this, DetailsActivity.class);
+		startActivity(viewAllIntent);
+	}
+	
 	private void setCountrySelectionListener(){
 		final Spinner countrySpinner = (Spinner) findViewById(R.id.countrySelector);
 		countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -213,7 +219,7 @@ public class MainActivity extends Activity {
 			int year = nlwDateNumber/10000;
 			int month = (nlwDateNumber-(year*10000))/100;
 			int date = nlwDateNumber-(year*10000)-(month*100);
-			String monthName = getMonthName(month);
+			String monthName = NlwUtil.getMonthName(month, false);
 			year = 2000+year;
 			
 			monthYearText.setText(monthName+" "+year);
@@ -234,49 +240,6 @@ public class MainActivity extends Activity {
 		month = (rightNow.get(Calendar.MONTH)+1)*100;
 		day = rightNow.get(Calendar.DATE);
 		return year+month+day;
-	}
-	
-	private String getMonthName(int month){
-		String monthName = "";
-		switch(month){
-		case 1:
-			monthName = "January";
-			break;
-		case 2:
-			monthName = "February";
-			break;
-		case 3:
-			monthName = "March";
-			break;
-		case 4:
-			monthName = "April";
-			break;
-		case 5:
-			monthName = "May";
-			break;
-		case 6:
-			monthName = "June";
-			break;
-		case 7:
-			monthName = "July";
-			break;
-		case 8:
-			monthName = "August";
-			break;
-		case 9:
-			monthName = "September";
-			break;
-		case 10:
-			monthName = "October";
-			break;
-		case 11:
-			monthName = "November";
-			break;
-		case 12:
-			monthName = "December";
-			break;
-		}
-		return monthName;
 	}
 	
 	private class DatabaseLoaderTask extends AsyncTask<Void, Void, Void>{

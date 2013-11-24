@@ -7,5 +7,6 @@
     <dimen name="nlwPadding">9dp</dimen>
     <dimen name="nlwCircleRadius">140dp</dimen>
     <dimen name="nlwTopMargin">15dp</dimen>
+    <dimen name="detailsSmallBlockWidth">50dp</dimen>
 
 </resources>

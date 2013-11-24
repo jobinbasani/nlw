@@ -50,6 +50,7 @@
 	            android:layout_marginTop="@dimen/nlwTopMargin"
 	            android:background="@layout/buttonshape"
 	            android:text="@string/viewAll"
+	            android:onClick="onViewAll"
 	            android:textColor="#FFFFFF"
 	            android:textSize="17sp" />
 	        

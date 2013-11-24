@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.jobinbasani.nlw.DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:parentActivityName="com.jobinbasani.nlw.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jobinbasani.nlw.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

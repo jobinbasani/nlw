@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="DEC"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/detailMonthText"
-        android:text="31"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40dp" />
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/detailYearText"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/detailDateText"
-        android:text="2013"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -37,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/detailMonthText"
-        android:text="Christmas Day"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -46,7 +45,6 @@
         android:layout_height="match_parent"
         android:layout_alignLeft="@+id/detailHolidayName"
         android:layout_below="@+id/detailHolidayName"
-        android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

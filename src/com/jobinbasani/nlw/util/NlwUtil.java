@@ -1,5 +1,7 @@
 package com.jobinbasani.nlw.util;
 
+import java.util.Calendar;
+
 
 public class NlwUtil {
 
@@ -47,6 +49,16 @@ public class NlwUtil {
 			monthName = monthName.substring(0, 3);
 		}
 		return monthName;
+	}
+	
+	public static int getCurrentDateNumber(){
+		Calendar rightNow = Calendar.getInstance();
+		int year, month, day;
+		
+		year = Integer.parseInt((rightNow.get(Calendar.YEAR)+"").substring(2, 4))*10000;
+		month = (rightNow.get(Calendar.MONTH)+1)*100;
+		day = rightNow.get(Calendar.DATE);
+		return year+month+day;
 	}
 
 }

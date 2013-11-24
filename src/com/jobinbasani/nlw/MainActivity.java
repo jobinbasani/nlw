@@ -172,6 +172,8 @@ public class MainActivity extends Activity {
 	
 	public void onViewAll(View view){
 		Intent viewAllIntent = new Intent(this, DetailsActivity.class);
+		Spinner countrySpinner = (Spinner) findViewById(R.id.countrySelector);
+		viewAllIntent.putExtra(COUNTRY_KEY, countrySpinner.getSelectedItem().toString());
 		startActivity(viewAllIntent);
 	}
 	
@@ -202,7 +204,7 @@ public class MainActivity extends Activity {
 		TextView nlwDateText = (TextView) findViewById(R.id.nlwDateText);
 		TextView holidayDetails = (TextView) findViewById(R.id.holidayDetails);
 		Spinner countrySelector = (Spinner) findViewById(R.id.countrySelector);
-		int currentDateNumber = getCurrentDateNumber();
+		int currentDateNumber = NlwUtil.getCurrentDateNumber();
 		String selectedCountry = countrySelector.getSelectedItem().toString();
 		String[] selectionArgs = new String[]{currentDateNumber+"", selectedCountry};
 		
@@ -232,16 +234,6 @@ public class MainActivity extends Activity {
 		db.close();
 	}
 	
-	private int getCurrentDateNumber(){
-		Calendar rightNow = Calendar.getInstance();
-		int year, month, day;
-		
-		year = Integer.parseInt((rightNow.get(Calendar.YEAR)+"").substring(2, 4))*10000;
-		month = (rightNow.get(Calendar.MONTH)+1)*100;
-		day = rightNow.get(Calendar.DATE);
-		return year+month+day;
-	}
-	
 	private class DatabaseLoaderTask extends AsyncTask<Void, Void, Void>{
 		
 		private ProgressDialog pDialog;
@@ -250,10 +242,10 @@ public class MainActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Loading ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
+	        pDialog.setMessage("Loading ...");
+	        pDialog.setIndeterminate(false);
+	        pDialog.setCancelable(true);
+	        pDialog.show();
 		}
 
 		@Override

@@ -6,6 +6,7 @@ import com.jobinbasani.nlw.util.NlwUtil;
 
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
@@ -24,10 +25,14 @@ public class DetailsActivity extends ListActivity {
 		setContentView(R.layout.activity_details);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		Intent detailsIntent = getIntent();
+		String country = detailsIntent.getStringExtra(MainActivity.COUNTRY_KEY);
+		TextView holidayCountryText = (TextView) findViewById(R.id.holidayCountryInfo);
+		holidayCountryText.setText("Upcoming long weekends in "+country);
 		
 		String[] from = new String[] { NlwDataEntry.COLUMN_NAME_NLWDATE, NlwDataEntry.COLUMN_NAME_NLWNAME, NlwDataEntry.COLUMN_NAME_NLWTEXT, NlwDataEntry.COLUMN_NAME_NLWDATE, NlwDataEntry.COLUMN_NAME_NLWDATE };
 	    int[] to = new int[] { R.id.detailDateText, R.id.detailHolidayName, R.id.detailHolidayDetails, R.id.detailYearText, R.id.detailMonthText};
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(), R.layout.nlw_details, getDetailsCursor(), from, to, SimpleCursorAdapter.NO_SELECTION);
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(), R.layout.nlw_details, getDetailsCursor(country), from, to, SimpleCursorAdapter.NO_SELECTION);
 		adapter.setViewBinder(new DetailsViewBinder());
 		setListAdapter(adapter);
 		
@@ -66,11 +71,10 @@ public class DetailsActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private Cursor getDetailsCursor(){
+	private Cursor getDetailsCursor(String country){
 		NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(getBaseContext());
 		SQLiteDatabase db = nlwDbHelper.getReadableDatabase();
-		
-		return db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" LIMIT 10", null);
+		return db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE "+NlwDataEntry.COLUMN_NAME_NLWCOUNTRY+"=? AND "+NlwDataEntry.COLUMN_NAME_NLWDATE+">? ORDER BY "+NlwDataEntry.COLUMN_NAME_NLWDATE, new String[]{country,NlwUtil.getCurrentDateNumber()+""});
 	}
 	
 	private class DetailsViewBinder implements ViewBinder{

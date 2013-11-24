@@ -18,6 +18,9 @@ import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.support.v4.app.NavUtils;
 
 public class DetailsActivity extends ListActivity {
+	
+	private Cursor cursor;
+	private SQLiteDatabase db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +32,21 @@ public class DetailsActivity extends ListActivity {
 		String country = detailsIntent.getStringExtra(MainActivity.COUNTRY_KEY);
 		TextView holidayCountryText = (TextView) findViewById(R.id.holidayCountryInfo);
 		holidayCountryText.setText("Upcoming long weekends in "+country);
+		cursor = getDetailsCursor(country);
 		
 		String[] from = new String[] { NlwDataEntry.COLUMN_NAME_NLWDATE, NlwDataEntry.COLUMN_NAME_NLWNAME, NlwDataEntry.COLUMN_NAME_NLWTEXT, NlwDataEntry.COLUMN_NAME_NLWDATE, NlwDataEntry.COLUMN_NAME_NLWDATE };
 	    int[] to = new int[] { R.id.detailDateText, R.id.detailHolidayName, R.id.detailHolidayDetails, R.id.detailYearText, R.id.detailMonthText};
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(), R.layout.nlw_details, getDetailsCursor(country), from, to, SimpleCursorAdapter.NO_SELECTION);
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(), R.layout.nlw_details, cursor, from, to, SimpleCursorAdapter.NO_SELECTION);
 		adapter.setViewBinder(new DetailsViewBinder());
 		setListAdapter(adapter);
 		
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		cursor.close();
+		db.close();
 	}
 
 	/**
@@ -73,7 +84,7 @@ public class DetailsActivity extends ListActivity {
 	
 	private Cursor getDetailsCursor(String country){
 		NlwDataDbHelper nlwDbHelper = new NlwDataDbHelper(getBaseContext());
-		SQLiteDatabase db = nlwDbHelper.getReadableDatabase();
+		db = nlwDbHelper.getReadableDatabase();
 		return db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE "+NlwDataEntry.COLUMN_NAME_NLWCOUNTRY+"=? AND "+NlwDataEntry.COLUMN_NAME_NLWDATE+">? ORDER BY "+NlwDataEntry.COLUMN_NAME_NLWDATE, new String[]{country,NlwUtil.getCurrentDateNumber()+""});
 	}
 	

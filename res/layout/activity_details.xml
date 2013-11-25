@@ -9,15 +9,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="@color/bgGreenColor"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:padding="@dimen/nlwPadding"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/whiteColor" />
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/holidayCountryInfo"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:background="@color/bgOrange" >
+
     </ListView>
 
 </RelativeLayout>

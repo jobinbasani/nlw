@@ -20,5 +20,8 @@
     <color name="bgOrange">#fdb747</color>
     <color name="redColor">#b70000</color>
     <color name="whiteColor">#ffffff</color>
+    <color name="detailsColor">#f5a81a</color>
+    <color name="redBlockColor">#fe4648</color>
+    <color name="blueBlockColor">#009ec2</color>
 
 </resources>

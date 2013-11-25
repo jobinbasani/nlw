@@ -9,17 +9,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:background="@color/redBlockColor"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/whiteColor" />
 
     <TextView
         android:id="@+id/detailDateText"
         android:layout_width="@dimen/detailsSmallBlockWidth"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/detailMonthText"
+        android:background="@color/blueBlockColor"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/whiteColor"
         android:textSize="40sp" />
 
     <TextView
@@ -28,8 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/detailDateText"
+        android:background="@color/redBlockColor"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/whiteColor" />
 
     <TextView
         android:id="@+id/detailHolidayName"
@@ -37,14 +43,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/detailMonthText"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/whiteColor" />
 
     <TextView
         android:id="@+id/detailHolidayDetails"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_alignLeft="@+id/detailHolidayName"
         android:layout_below="@+id/detailHolidayName"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/whiteColor" />
 
 </RelativeLayout>

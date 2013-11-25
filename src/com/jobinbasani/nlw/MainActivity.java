@@ -214,7 +214,7 @@ public class MainActivity extends Activity {
 		Cursor cursor = db.rawQuery("SELECT * FROM "+NlwDataEntry.TABLE_NAME+" WHERE "+NlwDataEntry.COLUMN_NAME_NLWDATE+">? AND "+NlwDataEntry.COLUMN_NAME_NLWCOUNTRY+"=? ORDER BY _ID LIMIT 1", selectionArgs);
 		cursor.moveToFirst();
 		if(cursor.getCount()>0){
-			nlwDateNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWDATE)));
+			nlwDateNumber = cursor.getInt(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWDATE));
 			readMoreLink = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWWIKI));
 			String holiday = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWNAME));
 			String holidayDetailText = cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWTEXT));

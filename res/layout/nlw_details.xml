@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/detailMonthText"
+        android:paddingLeft="@dimen/detailLeftPadding"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/whiteColor" />
 
@@ -52,6 +53,7 @@
         android:layout_height="fill_parent"
         android:layout_alignLeft="@+id/detailHolidayName"
         android:layout_below="@+id/detailHolidayName"
+        android:paddingLeft="@dimen/detailLeftPadding"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/whiteColor" />
 

@@ -14,7 +14,9 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.ViewBinder;
@@ -63,6 +65,15 @@ public class DetailsActivity extends ListActivity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
+		RelativeLayout rl =  (RelativeLayout) acmi.targetView;
+		
+		switch(item.getItemId()){
+		case OPEN_CALENDAR_ID:
+			TextView dateText = (TextView) rl.findViewById(R.id.detailDateText);
+			startActivity(NlwUtil.getOpenCalendarIntent(Integer.parseInt(dateText.getTag()+"")));
+			break;
+		}
 		return super.onContextItemSelected(item);
 	}
 

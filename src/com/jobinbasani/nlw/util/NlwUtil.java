@@ -1,6 +1,11 @@
 package com.jobinbasani.nlw.util;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.CalendarContract;
 
 
 public class NlwUtil {
@@ -59,6 +64,25 @@ public class NlwUtil {
 		month = (rightNow.get(Calendar.MONTH)+1)*100;
 		day = rightNow.get(Calendar.DATE);
 		return year+month+day;
+	}
+	
+	public static Calendar getCalendarObject(int nlwDateNumber){
+		int year = nlwDateNumber/10000;
+		int month = (nlwDateNumber-(year*10000))/100;
+		int date = nlwDateNumber-(year*10000)-(month*100);
+		year = 2000+year;
+		month--;
+		return new GregorianCalendar(year, month, date);
+	}
+	
+	public static Intent getOpenCalendarIntent(int nlwDateNumber){
+		Calendar cal = getCalendarObject(nlwDateNumber);
+		long time = cal.getTime().getTime();
+		Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+		builder.appendPath("time");
+		builder.appendPath(Long.toString(time));
+		Intent calendarIntent = new Intent(Intent.ACTION_VIEW,builder.build());
+		return calendarIntent;
 	}
 
 }

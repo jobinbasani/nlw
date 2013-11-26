@@ -1,7 +1,6 @@
 package com.jobinbasani.nlw;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
@@ -101,21 +100,14 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
-				Calendar cal = getCalendarObject();
-				long time = cal.getTime().getTime();
-				Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
-				builder.appendPath("time");
-				builder.appendPath(Long.toString(time));
-				Intent calendarIntent = new Intent(Intent.ACTION_VIEW,builder.build());
-				startActivity(calendarIntent);
+				startActivity(NlwUtil.getOpenCalendarIntent(nlwDateNumber));
 			}
 		});
 	}
 	
 	private void addNlwEvent(){
 		
-		Calendar cal = getCalendarObject();
+		Calendar cal = NlwUtil.getCalendarObject(nlwDateNumber);
 		Intent calendarIntent = new Intent(Intent.ACTION_INSERT);
 		calendarIntent.setData(Events.CONTENT_URI);
 		calendarIntent.putExtra(Events.ALL_DAY, true);
@@ -154,14 +146,6 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	private Calendar getCalendarObject(){
-		int year = nlwDateNumber/10000;
-		int month = (nlwDateNumber-(year*10000))/100;
-		int date = nlwDateNumber-(year*10000)-(month*100);
-		year = 2000+year;
-		month--;
-		return new GregorianCalendar(year, month, date);
-	}
 	
 	public void onReadMore(View view){
 		if(readMoreLink!=null){

@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class DetailsActivity extends ListActivity {
@@ -49,7 +50,7 @@ public class DetailsActivity extends ListActivity {
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(), R.layout.nlw_details, cursor, from, to, SimpleCursorAdapter.NO_SELECTION);
 		adapter.setViewBinder(new DetailsViewBinder());
 		setListAdapter(adapter);
-		
+		Toast.makeText(this, getResources().getString(R.string.detailsTip), Toast.LENGTH_LONG).show();
 	}
 
 	@Override

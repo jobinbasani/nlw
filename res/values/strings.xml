@@ -58,5 +58,6 @@
     <string name="detailsAddEvent">Add Event</string>
     <string name="detailsReadMore">Read More</string>
     <string name="upcomingWeekendsText">Upcoming long weekends in </string>
+    <string name="detailsTip">TIP: Press and hold an item for more options</string>
 
 </resources>

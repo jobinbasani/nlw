@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 
 
 public class NlwUtil {
@@ -83,6 +84,21 @@ public class NlwUtil {
 		builder.appendPath(Long.toString(time));
 		Intent calendarIntent = new Intent(Intent.ACTION_VIEW,builder.build());
 		return calendarIntent;
+	}
+	
+	public static Intent getAddEventIntent(int nlwDateNumber){
+		
+		Calendar cal = getCalendarObject(nlwDateNumber);
+		Intent calendarIntent = new Intent(Intent.ACTION_INSERT);
+		calendarIntent.setData(Events.CONTENT_URI);
+		calendarIntent.putExtra(Events.ALL_DAY, true);
+		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTime().getTime());
+		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTime().getTime()+600000);
+		return calendarIntent;
+	}
+	
+	public static Intent getBrowserIntent(String url){
+		return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 	}
 
 }

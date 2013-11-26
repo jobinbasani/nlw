@@ -41,7 +41,7 @@ public class DetailsActivity extends ListActivity {
 		Intent detailsIntent = getIntent();
 		String country = detailsIntent.getStringExtra(MainActivity.COUNTRY_KEY);
 		TextView holidayCountryText = (TextView) findViewById(R.id.holidayCountryInfo);
-		holidayCountryText.setText("Upcoming long weekends in "+country);
+		holidayCountryText.setText(getResources().getString(R.string.upcomingWeekendsText)+" "+country);
 		cursor = getDetailsCursor(country);
 		
 		String[] from = new String[] { NlwDataEntry.COLUMN_NAME_NLWDATE, NlwDataEntry.COLUMN_NAME_NLWNAME, NlwDataEntry.COLUMN_NAME_NLWTEXT, NlwDataEntry.COLUMN_NAME_NLWDATE, NlwDataEntry.COLUMN_NAME_NLWDATE };
@@ -56,22 +56,30 @@ public class DetailsActivity extends ListActivity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		
-		menu.setHeaderTitle("More actions...");
-		menu.add(Menu.NONE, OPEN_CALENDAR_ID, 100, "Open Calendar");
-		menu.add(Menu.NONE, ADD_EVENT_ID, 200, "Add Event");
-		menu.add(Menu.NONE, READ_MORE_ID, 300, "Read More");
+		AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) menuInfo;
+		RelativeLayout rl =  (RelativeLayout) acmi.targetView;
+		TextView dateText = (TextView) rl.findViewById(R.id.detailHolidayName);
+		menu.setHeaderTitle(dateText.getText()+"");
+		menu.add(Menu.NONE, OPEN_CALENDAR_ID, 100, getResources().getString(R.string.detailsOpenCalendar));
+		menu.add(Menu.NONE, ADD_EVENT_ID, 200, getResources().getString(R.string.detailsAddEvent));
+		menu.add(Menu.NONE, READ_MORE_ID, 300, getResources().getString(R.string.detailsReadMore));
 	}
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
 		RelativeLayout rl =  (RelativeLayout) acmi.targetView;
-		
+		TextView dateText = (TextView) rl.findViewById(R.id.detailDateText);
 		switch(item.getItemId()){
 		case OPEN_CALENDAR_ID:
-			TextView dateText = (TextView) rl.findViewById(R.id.detailDateText);
 			startActivity(NlwUtil.getOpenCalendarIntent(Integer.parseInt(dateText.getTag()+"")));
+			break;
+		case ADD_EVENT_ID:
+			startActivity(NlwUtil.getAddEventIntent(Integer.parseInt(dateText.getTag()+"")));
+			break;
+		case READ_MORE_ID:
+			TextView detailsText = (TextView) rl.findViewById(R.id.detailHolidayDetails);
+			startActivity(NlwUtil.getBrowserIntent(detailsText.getTag()+""));
 			break;
 		}
 		return super.onContextItemSelected(item);
@@ -148,6 +156,11 @@ public class DetailsActivity extends ListActivity {
 				int dateNumber = cursor.getInt(columnIndex);
 				int year = (dateNumber/10000)+2000;
 				yearText.setText(year+"");
+				return true;
+			}else if(view.getId() == R.id.detailHolidayDetails){
+				TextView detailsText = (TextView) view;
+				detailsText.setText(cursor.getString(columnIndex)+"");
+				detailsText.setTag(cursor.getString(cursor.getColumnIndexOrThrow(NlwDataEntry.COLUMN_NAME_NLWWIKI)));
 				return true;
 			}
 			return false;

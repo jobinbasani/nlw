@@ -1,6 +1,5 @@
 package com.jobinbasani.nlw;
 
-import java.util.Calendar;
 import java.util.List;
 
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
@@ -10,8 +9,6 @@ import com.jobinbasani.nlw.util.NlwUtil;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.provider.CalendarContract.Events;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -62,7 +59,7 @@ public class MainActivity extends Activity {
 		
 		switch(item.getItemId()){
 		case R.id.eventMenuItem:
-			addNlwEvent();
+			startActivity(NlwUtil.getAddEventIntent(nlwDateNumber));
 			break;
 		case R.id.feedbackMenuItem:
 			sendFeedback();
@@ -105,17 +102,6 @@ public class MainActivity extends Activity {
 		});
 	}
 	
-	private void addNlwEvent(){
-		
-		Calendar cal = NlwUtil.getCalendarObject(nlwDateNumber);
-		Intent calendarIntent = new Intent(Intent.ACTION_INSERT);
-		calendarIntent.setData(Events.CONTENT_URI);
-		calendarIntent.putExtra(Events.ALL_DAY, true);
-		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTime().getTime());
-		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTime().getTime()+600000);
-		startActivity(calendarIntent);
-	}
-	
 	private void sendFeedback(){
 		Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+getResources().getString(R.string.feedbackEmail)+"?subject="+Uri.encode("NLW Feedback")));
 		emailIntent.putExtra(Intent.EXTRA_SUBJECT, "NLW Feedback");
@@ -149,8 +135,7 @@ public class MainActivity extends Activity {
 	
 	public void onReadMore(View view){
 		if(readMoreLink!=null){
-			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(readMoreLink));
-			startActivity(browserIntent);
+			startActivity(NlwUtil.getBrowserIntent(readMoreLink));
 		}
 	}
 	

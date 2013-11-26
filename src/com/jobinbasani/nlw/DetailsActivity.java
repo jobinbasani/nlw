@@ -9,9 +9,12 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.ViewBinder;
@@ -21,6 +24,9 @@ public class DetailsActivity extends ListActivity {
 	
 	private Cursor cursor;
 	private SQLiteDatabase db;
+	private static final int OPEN_CALENDAR_ID = 1;
+	private static final int ADD_EVENT_ID = 2;
+	private static final int READ_MORE_ID = 3;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,8 @@ public class DetailsActivity extends ListActivity {
 		setContentView(R.layout.activity_details);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		final ListView listView = getListView();
+		registerForContextMenu(listView);
 		Intent detailsIntent = getIntent();
 		String country = detailsIntent.getStringExtra(MainActivity.COUNTRY_KEY);
 		TextView holidayCountryText = (TextView) findViewById(R.id.holidayCountryInfo);
@@ -40,6 +48,22 @@ public class DetailsActivity extends ListActivity {
 		adapter.setViewBinder(new DetailsViewBinder());
 		setListAdapter(adapter);
 		
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		
+		menu.setHeaderTitle("More actions...");
+		menu.add(Menu.NONE, OPEN_CALENDAR_ID, 100, "Open Calendar");
+		menu.add(Menu.NONE, ADD_EVENT_ID, 200, "Add Event");
+		menu.add(Menu.NONE, READ_MORE_ID, 300, "Read More");
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		return super.onContextItemSelected(item);
 	}
 
 	@Override
@@ -99,6 +123,7 @@ public class DetailsActivity extends ListActivity {
 				int month = (dateNumber-(year*10000))/100;
 				int date = dateNumber-(year*10000)-(month*100);
 				dateText.setText(date+"");
+				dateText.setTag(dateNumber+"");
 				return true;
 			}else if(view.getId() == R.id.detailMonthText){
 				TextView monthText = (TextView) view;

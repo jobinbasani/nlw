@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/bgGreenColor"
+        android:background="@color/detailsHeader"
         android:gravity="center"
         android:padding="@dimen/nlwPadding"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/holidayCountryInfo"
         android:layout_centerHorizontal="true"
-        android:background="@color/bgOrange" >
+        android:background="@color/bgGreenColor" >
 
     </ListView>
 

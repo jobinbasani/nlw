@@ -29,7 +29,6 @@
         <item>141111~Canada~Remembrance Day~https://en.wikipedia.org/wiki/Remembrance_Day~A memorial day observed in Commonwealth countries since the end of World War I to remember the members of their armed forces who have died in the line of duty</item>
         <item>141225~Canada~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
         <item>141226~Canada~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day.Observed in Ontario</item>
-        <item>131128~USA~Thanksgiving Day~https://en.wikipedia.org/wiki/Thanksgiving_(United_States)~Holiday celebrated in the United States on the fourth Thursday in November</item>
         <item>131225~USA~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
         <item>140101~USA~New Year\’s Day~https://en.wikipedia.org/wiki/New_Year\'s_Day~The first day of the year on the modern Gregorian calendar</item>
         <item>140120~USA~Birthday of Martin Luther King, Jr.~https://en.wikipedia.org/wiki/Martin_Luther_King,_Jr._Day~Observed on the third Monday of January each year, which is around the time of King\'s birthday, January 15</item>
@@ -58,6 +57,15 @@
         <item>131226~UK~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day</item>
         <item>140101~UK~New Year\’s Day~https://en.wikipedia.org/wiki/New_Year\'s_Day~The first day of the year on the modern Gregorian calendar</item>
         <item>140418~UK~Good Friday~https://en.wikipedia.org/wiki/Good_Friday~Commemorating the crucifixion of Jesus Christ and his death at Calvary</item>
+        <item>140421~UK~Easter Monday~https://en.wikipedia.org/wiki/Easter_Monday~Easter Monday in the Roman Catholic liturgical calendar is the second day of the octave of Easter Week and analogously in the Eastern Orthodox Church is the second day of Bright Week.Observed in England, Northern Ireland and Wales.</item>
+        <item>140505~UK~May Day Holiday~http://en.wikipedia.org/wiki/May_Day~A traditional spring holiday and coincides with International Workers\' Day</item>
+        <item>140526~UK~Spring Bank Holiday~http://en.wikipedia.org/wiki/Bank_holiday~Last Monday in May</item>
+        <item>140804~UK~Summer Bank Holiday~http://en.wikipedia.org/wiki/Bank_holiday~First Monday in August. Observed in Scotland.</item>
+        <item>140825~UK~Summer Bank Holiday~http://en.wikipedia.org/wiki/Bank_holiday~Last Monday in August. Observed in England, Northern Ireland and Wales.</item>
+        <item>141031~UK~Halloween~http://en.wikipedia.org/wiki/Halloween~A yearly celebration on 31 October, the eve of the Western Christian feast of All Hallows\' Day</item>
+        <item>141105~UK~Guy Fawkes Day~http://en.wikipedia.org/wiki/Guy_Fawkes_Night~Guy Fawkes Day, also known as Guy Fawkes Night, Bonfire Night and Firework Night, is an annual commemoration observed on 5 November</item>
+        <item>141225~UK~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
+        <item>141226~UK~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day</item>
     </string-array>
 
     <string name="readMore">Read More</string>

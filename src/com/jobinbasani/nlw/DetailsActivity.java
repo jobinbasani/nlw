@@ -30,6 +30,7 @@ public class DetailsActivity extends ListActivity {
 	private static final int OPEN_CALENDAR_ID = 1;
 	private static final int ADD_EVENT_ID = 2;
 	private static final int READ_MORE_ID = 3;
+	private static final int SHARE_ID = 4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +63,9 @@ public class DetailsActivity extends ListActivity {
 		TextView dateText = (TextView) rl.findViewById(R.id.detailHolidayName);
 		menu.setHeaderTitle(dateText.getText()+"");
 		menu.add(Menu.NONE, OPEN_CALENDAR_ID, 100, getResources().getString(R.string.detailsOpenCalendar));
-		menu.add(Menu.NONE, ADD_EVENT_ID, 200, getResources().getString(R.string.detailsAddEvent));
-		menu.add(Menu.NONE, READ_MORE_ID, 300, getResources().getString(R.string.detailsReadMore));
+		menu.add(Menu.NONE, ADD_EVENT_ID, 200, getResources().getString(R.string.addEventAction));
+		menu.add(Menu.NONE, READ_MORE_ID, 300, getResources().getString(R.string.readMore));
+		menu.add(Menu.NONE, SHARE_ID, 400, getResources().getString(R.string.shareAction));
 	}
 
 	@Override
@@ -71,6 +73,9 @@ public class DetailsActivity extends ListActivity {
 		AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
 		RelativeLayout rl =  (RelativeLayout) acmi.targetView;
 		TextView dateText = (TextView) rl.findViewById(R.id.detailDateText);
+		TextView detailsText = (TextView) rl.findViewById(R.id.detailHolidayDetails);
+		TextView holidayText = (TextView) rl.findViewById(R.id.detailHolidayName);
+		
 		switch(item.getItemId()){
 		case OPEN_CALENDAR_ID:
 			startActivity(NlwUtil.getOpenCalendarIntent(Integer.parseInt(dateText.getTag()+"")));
@@ -79,8 +84,15 @@ public class DetailsActivity extends ListActivity {
 			startActivity(NlwUtil.getAddEventIntent(Integer.parseInt(dateText.getTag()+"")));
 			break;
 		case READ_MORE_ID:
-			TextView detailsText = (TextView) rl.findViewById(R.id.detailHolidayDetails);
 			startActivity(NlwUtil.getBrowserIntent(detailsText.getTag()+""));
+			break;
+		case SHARE_ID:
+			int dateNumber = Integer.parseInt(dateText.getTag()+"");
+			int year = (dateNumber/10000)*10000;
+			int month = (dateNumber - year)/100;
+			int date = dateNumber-(year+(month*100));
+			year = (year/10000)+2000;
+			startActivity(NlwUtil.getShareDataIntent(holidayText.getText()+" on "+NlwUtil.getMonthName(month, false)+" "+date+", "+year+" - "+detailsText.getText()+". Read More at "+detailsText.getTag()));
 			break;
 		}
 		return super.onContextItemSelected(item);

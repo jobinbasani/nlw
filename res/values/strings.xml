@@ -77,8 +77,6 @@
     <string name="title_activity_details">Holiday Details</string>
     <string name="hello_world">Hello world!</string>
     <string name="detailsOpenCalendar">Open Calendar</string>
-    <string name="detailsAddEvent">Add Event</string>
-    <string name="detailsReadMore">Read More</string>
     <string name="upcomingWeekendsText">Upcoming long weekends in </string>
     <string name="detailsTip">TIP: Press and hold an item for more options</string>
 

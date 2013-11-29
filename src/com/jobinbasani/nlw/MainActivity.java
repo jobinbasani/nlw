@@ -121,14 +121,11 @@ public class MainActivity extends Activity {
 	private void shareNlwDetails(){
 		if(mShareActionProvider != null){
 			TextView holidayText = (TextView)findViewById(R.id.nlwHolidayText);
+			TextView holidayDetails = (TextView) findViewById(R.id.holidayDetails);
 			TextView holidayDate = (TextView) findViewById(R.id.nlwDateText);
 			TextView holidayMonth = (TextView) findViewById(R.id.monthYearText);
 			String[] holidayMonthArray = holidayMonth.getText().toString().split(" ");
-			Intent shareIntent = new Intent();
-			shareIntent.setAction(Intent.ACTION_SEND);
-			shareIntent.putExtra(Intent.EXTRA_TEXT, holidayText.getText()+" on "+holidayMonthArray[0]+" "+holidayDate.getText()+", "+holidayMonthArray[1]+". Read more at "+readMoreLink);
-			shareIntent.setType("text/plain");
-			mShareActionProvider.setShareIntent(shareIntent);
+			mShareActionProvider.setShareIntent(NlwUtil.getShareDataIntent(holidayText.getText()+" on "+holidayMonthArray[0]+" "+holidayDate.getText()+", "+holidayMonthArray[1]+" - "+holidayDetails.getText()+". Read more at "+readMoreLink));
 		}
 	}
 	

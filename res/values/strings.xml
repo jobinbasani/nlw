@@ -78,6 +78,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="detailsOpenCalendar">Open Calendar</string>
     <string name="upcomingWeekendsText">Upcoming long weekends in </string>
-    <string name="detailsTip">TIP: Press and hold an item for more options</string>
+    <string name="infoAction">Info</string>
+    <string name="infoDialogTitle">Info</string>
+    <string name="infoDialogMessage">Press and hold on a holiday for more options</string>
+    <string name="okButtonText">OK</string>
 
 </resources>

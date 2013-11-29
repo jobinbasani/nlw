@@ -5,7 +5,9 @@ import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
 import com.jobinbasani.nlw.util.NlwUtil;
 
 import android.os.Bundle;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,7 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.ViewBinder;
-import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class DetailsActivity extends ListActivity {
@@ -51,7 +52,6 @@ public class DetailsActivity extends ListActivity {
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(), R.layout.nlw_details, cursor, from, to, SimpleCursorAdapter.NO_SELECTION);
 		adapter.setViewBinder(new DetailsViewBinder());
 		setListAdapter(adapter);
-		Toast.makeText(this, getResources().getString(R.string.detailsTip), Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -134,6 +134,20 @@ public class DetailsActivity extends ListActivity {
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.info_settings:
+			AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+			alertBuilder.setTitle(getResources().getString(R.string.infoDialogTitle))
+			.setMessage(getResources().getString(R.string.infoDialogMessage))
+			.setCancelable(false)
+			.setPositiveButton(getResources().getString(R.string.okButtonText), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+				}
+			});
+			AlertDialog dialog = alertBuilder.create();
+			dialog.show();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}

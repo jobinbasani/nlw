@@ -103,14 +103,14 @@ public class MainActivity extends Activity {
 	}
 	
 	private void sendFeedback(){
-		Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+getResources().getString(R.string.feedbackEmail)+"?subject="+Uri.encode("NLW Feedback")));
-		emailIntent.putExtra(Intent.EXTRA_SUBJECT, "NLW Feedback");
+		Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+getResources().getString(R.string.feedbackEmail)+"?subject="+Uri.encode(getResources().getString(R.string.feedbackSubject))));
+		emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.feedbackSubject));
 		
 		List<ResolveInfo> activities = getPackageManager().queryIntentActivities(emailIntent, 0);
 		//To prevent Receiver leak bug when only application is available for Intent
 		if (activities.size() > 1) {
 		    // Create and start the chooser
-		    Intent chooser = Intent.createChooser(emailIntent, "Send Feedback");
+		    Intent chooser = Intent.createChooser(emailIntent, getResources().getString(R.string.feedbackIntentTitle));
 		    startActivity(chooser);
 
 		  } else {
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
 			TextView holidayDate = (TextView) findViewById(R.id.nlwDateText);
 			TextView holidayMonth = (TextView) findViewById(R.id.monthYearText);
 			String[] holidayMonthArray = holidayMonth.getText().toString().split(" ");
-			mShareActionProvider.setShareIntent(NlwUtil.getShareDataIntent(holidayText.getText()+" on "+holidayMonthArray[0]+" "+holidayDate.getText()+", "+holidayMonthArray[1]+" - "+holidayDetails.getText()+". Read more at "+readMoreLink));
+			mShareActionProvider.setShareIntent(NlwUtil.getShareDataIntent(holidayText.getText()+" on "+holidayMonthArray[0]+" "+holidayDate.getText()+", "+holidayMonthArray[1]+" - "+holidayDetails.getText()+". "+getResources().getString(R.string.readMoreAt)+" "+readMoreLink));
 		}
 	}
 	
@@ -208,7 +208,7 @@ public class MainActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(MainActivity.this);
-	        pDialog.setMessage("Loading ...");
+	        pDialog.setMessage(getResources().getString(R.string.loadingText));
 	        pDialog.setIndeterminate(false);
 	        pDialog.setCancelable(true);
 	        pDialog.show();

@@ -92,7 +92,7 @@ public class DetailsActivity extends ListActivity {
 			int month = (dateNumber - year)/100;
 			int date = dateNumber-(year+(month*100));
 			year = (year/10000)+2000;
-			startActivity(NlwUtil.getShareDataIntent(holidayText.getText()+" on "+NlwUtil.getMonthName(month, false)+" "+date+", "+year+" - "+detailsText.getText()+". Read More at "+detailsText.getTag()));
+			startActivity(NlwUtil.getShareDataIntent(holidayText.getText()+" on "+NlwUtil.getMonthName(month, false)+" "+date+", "+year+" - "+detailsText.getText()+". "+getResources().getString(R.string.readMoreAt)+" "+detailsText.getTag()));
 			break;
 		}
 		return super.onContextItemSelected(item);

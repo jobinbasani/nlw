@@ -72,7 +72,8 @@ public class MainActivity extends Activity {
 		
 		switch(item.getItemId()){
 		case R.id.eventMenuItem:
-			startActivity(NlwUtil.getAddEventIntent(nlwDateNumber));
+			TextView holidayText = (TextView) findViewById(R.id.nlwHolidayText);
+			startActivity(NlwUtil.getAddEventIntent(nlwDateNumber, holidayText.getText()+""));
 			break;
 		case R.id.feedbackMenuItem:
 			sendFeedback();

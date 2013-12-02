@@ -86,12 +86,13 @@ public class NlwUtil {
 		return calendarIntent;
 	}
 	
-	public static Intent getAddEventIntent(int nlwDateNumber){
+	public static Intent getAddEventIntent(int nlwDateNumber, String title){
 		
 		Calendar cal = getCalendarObject(nlwDateNumber);
 		Intent calendarIntent = new Intent(Intent.ACTION_INSERT);
 		calendarIntent.setData(Events.CONTENT_URI);
 		calendarIntent.putExtra(Events.ALL_DAY, true);
+		calendarIntent.putExtra(Events.TITLE, title);
 		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTime().getTime());
 		calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTime().getTime()+600000);
 		return calendarIntent;

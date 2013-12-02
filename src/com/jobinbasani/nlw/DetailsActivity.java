@@ -94,7 +94,7 @@ public class DetailsActivity extends ListActivity {
 			startActivity(NlwUtil.getOpenCalendarIntent(Integer.parseInt(dateText.getTag()+"")));
 			break;
 		case ADD_EVENT_ID:
-			startActivity(NlwUtil.getAddEventIntent(Integer.parseInt(dateText.getTag()+"")));
+			startActivity(NlwUtil.getAddEventIntent(Integer.parseInt(dateText.getTag()+""), holidayText.getText()+""));
 			break;
 		case READ_MORE_ID:
 			startActivity(NlwUtil.getBrowserIntent(detailsText.getTag()+""));

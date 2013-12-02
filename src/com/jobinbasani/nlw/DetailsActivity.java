@@ -1,5 +1,6 @@
 package com.jobinbasani.nlw;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.jobinbasani.nlw.sql.NlwDataDbHelper;
 import com.jobinbasani.nlw.sql.NlwDataContract.NlwDataEntry;
 import com.jobinbasani.nlw.util.NlwUtil;
@@ -52,6 +53,18 @@ public class DetailsActivity extends ListActivity {
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(), R.layout.nlw_details, cursor, from, to, SimpleCursorAdapter.NO_SELECTION);
 		adapter.setViewBinder(new DetailsViewBinder());
 		setListAdapter(adapter);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); 
 	}
 
 	@Override

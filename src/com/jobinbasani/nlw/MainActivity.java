@@ -209,6 +209,10 @@ public class MainActivity extends Activity {
 			holidayText.setText(holiday);
 			holidayDetails.setText(holidayDetailText);
 			
+			if(mShareActionProvider!=null){
+				mShareActionProvider.setShareIntent(NlwUtil.getShareDataIntent(holiday+" on "+monthName+" "+date+", "+year+" - "+holidayDetailText+". "+getResources().getString(R.string.readMoreAt)+" "+readMoreLink));
+			}
+			
 		}
 		cursor.close();
 		db.close();

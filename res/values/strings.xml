@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Next Long Weekend</string>
-    <string name="action_settings">Settings</string>
 
     <string-array name="countryArray">
         <item>Australia</item>
@@ -85,5 +84,7 @@
     <string name="feedbackIntentTitle">Send Feedback</string>
     <string name="loadingText">Loading data</string>
     <string name="readMoreAt">Read more at</string>
+    <string name="title_activity_read_more">Read More</string>
+    <string name="openBrowser">Open in Browser</string>
 
 </resources>

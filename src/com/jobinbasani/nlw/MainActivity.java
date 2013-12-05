@@ -146,7 +146,9 @@ public class MainActivity extends Activity {
 	
 	public void onReadMore(View view){
 		if(readMoreLink!=null){
-			startActivity(NlwUtil.getBrowserIntent(readMoreLink));
+			//startActivity(NlwUtil.getBrowserIntent(readMoreLink));
+			
+			startActivity(NlwUtil.getReadMoreIntent(this, readMoreLink));
 		}
 	}
 	

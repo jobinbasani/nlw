@@ -98,7 +98,7 @@ public class DetailsActivity extends ListActivity {
 			startActivity(NlwUtil.getAddEventIntent(Integer.parseInt(dateText.getTag()+""), holidayText.getText()+""));
 			break;
 		case READ_MORE_ID:
-			startActivity(NlwUtil.getBrowserIntent(detailsText.getTag()+""));
+			startActivity(NlwUtil.getReadMoreIntent(this,detailsText.getTag()+""));
 			break;
 		case SHARE_ID:
 			int dateNumber = Integer.parseInt(dateText.getTag()+"");

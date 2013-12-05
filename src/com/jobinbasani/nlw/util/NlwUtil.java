@@ -3,6 +3,9 @@ package com.jobinbasani.nlw.util;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.jobinbasani.nlw.ReadMoreActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CalendarContract;
@@ -10,6 +13,8 @@ import android.provider.CalendarContract.Events;
 
 
 public class NlwUtil {
+	
+	public static final String URL_KEY = "url";
 
 	public static String getMonthName(int month, boolean abbr){
 		String monthName = "";
@@ -98,8 +103,10 @@ public class NlwUtil {
 		return calendarIntent;
 	}
 	
-	public static Intent getBrowserIntent(String url){
-		return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+	public static Intent getReadMoreIntent(Context context, String url){
+		Intent readMoreIntent = new Intent(context,ReadMoreActivity.class);
+		readMoreIntent.putExtra(URL_KEY, url);
+		return readMoreIntent;
 	}
 	
 	public static Intent getShareDataIntent(String data){

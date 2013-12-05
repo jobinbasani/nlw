@@ -82,9 +82,10 @@
     <string name="okButtonText">OK</string>
     <string name="feedbackSubject">NLW Feedback</string>
     <string name="feedbackIntentTitle">Send Feedback</string>
-    <string name="loadingText">Loading data</string>
+    <string name="loadingText">Loading &#8230;</string>
     <string name="readMoreAt">Read more at</string>
     <string name="title_activity_read_more">Read More</string>
     <string name="openBrowser">Open in Browser</string>
+    <string name="browserChooserTitle">Select Browser</string>
 
 </resources>

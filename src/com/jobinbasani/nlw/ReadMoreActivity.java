@@ -2,6 +2,7 @@ package com.jobinbasani.nlw;
 
 import com.jobinbasani.nlw.util.NlwUtil;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,6 +16,8 @@ import android.webkit.WebViewClient;
 
 public class ReadMoreActivity extends Activity {
 	
+	private WebView webView;
+	
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +27,9 @@ public class ReadMoreActivity extends Activity {
 		setupActionBar();
 		
 		Intent readMoreIntent = getIntent();
-		final ProgressDialog pd = ProgressDialog.show(this, "", "Loading...",true);
+		final ProgressDialog pd = ProgressDialog.show(this, "", getResources().getString(R.string.loadingText),true);
 		String url = readMoreIntent.getStringExtra(NlwUtil.URL_KEY);
-		WebView webView = (WebView) findViewById(R.id.webView);
+		webView = (WebView) findViewById(R.id.webView);
 		
 		webView.getSettings().setSupportZoom(true);
 		webView.getSettings().setBuiltInZoomControls(true);
@@ -35,7 +38,7 @@ public class ReadMoreActivity extends Activity {
 
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
-				if(newProgress >= 85){
+				if(newProgress >= 80){
 					pd.dismiss();
 				}
 				super.onProgressChanged(view, newProgress);
@@ -67,6 +70,13 @@ public class ReadMoreActivity extends Activity {
 		switch(item.getItemId()){
 		case android.R.id.home:
 			onBackPressed();
+			return true;
+		case R.id.open_browser:
+			String url = webView.getOriginalUrl();
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+			browserIntent.setData(Uri.parse(url));
+			Intent chooser = Intent.createChooser(browserIntent, getResources().getString(R.string.browserChooserTitle));
+			startActivity(chooser);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

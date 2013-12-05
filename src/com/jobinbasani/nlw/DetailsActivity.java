@@ -161,7 +161,7 @@ public class DetailsActivity extends ListActivity {
 			});
 			AlertDialog dialog = alertBuilder.create();
 			dialog.show();
-			break;
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

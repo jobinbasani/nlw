@@ -3,3 +3,4 @@
 .settings/*
 /gen
 /bin
+/proguard

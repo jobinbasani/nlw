@@ -75,6 +75,7 @@ public class DetailsActivity extends ListActivity {
 		RelativeLayout rl =  (RelativeLayout) acmi.targetView;
 		TextView dateText = (TextView) rl.findViewById(R.id.detailHolidayName);
 		menu.setHeaderTitle(dateText.getText()+"");
+		menu.setHeaderIcon(R.drawable.get_info);
 		menu.add(Menu.NONE, OPEN_CALENDAR_ID, 100, getResources().getString(R.string.detailsOpenCalendar));
 		menu.add(Menu.NONE, ADD_EVENT_ID, 200, getResources().getString(R.string.addEventAction));
 		menu.add(Menu.NONE, READ_MORE_ID, 300, getResources().getString(R.string.readMore));

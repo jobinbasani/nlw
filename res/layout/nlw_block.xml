@@ -39,12 +39,22 @@
         android:padding="@dimen/nlwPadding"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/whiteColor" />
-
+    
+    <TextView
+        android:id="@+id/daysToGo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nlwHolidayText"
+        android:gravity="center"
+        android:padding="@dimen/nlwPadding"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/whiteColor" />
+    
     <ImageView
         android:id="@+id/holidayBottomLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nlwHolidayText"
+        android:layout_below="@id/daysToGo"
         android:contentDescription="@string/dottedLineDescr"
         android:src="@layout/dotted" />
 

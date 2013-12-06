@@ -81,6 +81,13 @@ public class NlwUtil {
 		return new GregorianCalendar(year, month, date);
 	}
 	
+	public static int getDateDiff(int futureDateNum, int currentDateNum){
+		int difference= 
+				((int)((getCalendarObject(futureDateNum).getTime().getTime()/(24*60*60*1000))
+				-(int)(getCalendarObject(currentDateNum).getTime().getTime()/(24*60*60*1000))));
+		return difference;
+	}
+	
 	public static Intent getOpenCalendarIntent(int nlwDateNumber){
 		Calendar cal = getCalendarObject(nlwDateNumber);
 		long time = cal.getTime().getTime();

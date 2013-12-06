@@ -184,6 +184,7 @@ public class MainActivity extends Activity {
 		TextView holidayText = (TextView) findViewById(R.id.nlwHolidayText);
 		TextView nlwDateText = (TextView) findViewById(R.id.nlwDateText);
 		TextView holidayDetails = (TextView) findViewById(R.id.holidayDetails);
+		TextView daysToGoText = (TextView) findViewById(R.id.daysToGo);
 		Spinner countrySelector = (Spinner) findViewById(R.id.countrySelector);
 		int currentDateNumber = NlwUtil.getCurrentDateNumber();
 		String selectedCountry = countrySelector.getSelectedItem().toString();
@@ -202,6 +203,7 @@ public class MainActivity extends Activity {
 			int year = nlwDateNumber/10000;
 			int month = (nlwDateNumber-(year*10000))/100;
 			int date = nlwDateNumber-(year*10000)-(month*100);
+			int dateDiff = NlwUtil.getDateDiff(nlwDateNumber, currentDateNumber);
 			String monthName = NlwUtil.getMonthName(month, false);
 			year = 2000+year;
 			
@@ -209,7 +211,8 @@ public class MainActivity extends Activity {
 			nlwDateText.setText(date+"");
 			holidayText.setText(holiday);
 			holidayDetails.setText(holidayDetailText);
-			
+			daysToGoText.setText(dateDiff+(dateDiff>1?" days ":" day ")+"to go!");
+			NlwUtil.getDateDiff(nlwDateNumber, currentDateNumber);
 			if(mShareActionProvider!=null){
 				mShareActionProvider.setShareIntent(NlwUtil.getShareDataIntent(holiday+" on "+monthName+" "+date+", "+year+" - "+holidayDetailText+". "+getResources().getString(R.string.readMoreAt)+" "+readMoreLink));
 			}

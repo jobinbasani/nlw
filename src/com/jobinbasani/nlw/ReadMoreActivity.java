@@ -1,33 +1,36 @@
 package com.jobinbasani.nlw;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.jobinbasani.nlw.util.NlwUtil;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 public class ReadMoreActivity extends Activity {
 	
 	private WebView webView;
+	final Activity activity = this;
 	
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_read_more);
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
 		Intent readMoreIntent = getIntent();
-		final ProgressDialog pd = ProgressDialog.show(this, "", getResources().getString(R.string.loadingText),true);
 		String url = readMoreIntent.getStringExtra(NlwUtil.URL_KEY);
 		webView = (WebView) findViewById(R.id.webView);
 		
@@ -38,17 +41,34 @@ public class ReadMoreActivity extends Activity {
 
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
-				if(newProgress >= 80){
-					pd.dismiss();
-				}
-				super.onProgressChanged(view, newProgress);
+				activity.setProgress(newProgress * 100);
 			}
 			
 		});
-		webView.setWebViewClient(new WebViewClient()); 
+		webView.setWebViewClient(new WebViewClient(){
+
+			@Override
+			public void onReceivedError(WebView view, int errorCode,
+					String description, String failingUrl) {
+				Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
+			}
+			
+		}); 
 		webView.loadUrl(url);
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

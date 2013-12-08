@@ -35,13 +35,17 @@ public class ReadMoreActivity extends Activity {
 		webView = (WebView) findViewById(R.id.webView);
 		
 		webView.getSettings().setSupportZoom(true);
-		webView.getSettings().setBuiltInZoomControls(true);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.setWebChromeClient(new WebChromeClient(){
 
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
+				
+				activity.setTitle(getResources().getString(R.string.loadingText));
 				activity.setProgress(newProgress * 100);
+				if(newProgress > 80){
+					activity.setTitle(getResources().getString(R.string.title_activity_read_more));
+				}
 			}
 			
 		});
@@ -50,7 +54,7 @@ public class ReadMoreActivity extends Activity {
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
 					String description, String failingUrl) {
-				Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, description, Toast.LENGTH_SHORT).show();
 			}
 			
 		}); 

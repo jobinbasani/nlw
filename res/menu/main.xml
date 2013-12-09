@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/shareMenuItem" android:showAsAction="ifRoom" android:title="@string/shareAction" android:orderInCategory="100" android:actionProviderClass="android.widget.ShareActionProvider"></item>
+    <item android:id="@+id/refreshNlw" android:showAsAction="ifRoom" android:title="@string/refreshNlw" android:orderInCategory="150" android:icon="@drawable/refresh"></item>
     <item android:id="@+id/eventMenuItem" android:showAsAction="never" android:title="@string/addEventAction" android:orderInCategory="200"></item>
     <item android:id="@+id/feedbackMenuItem" android:showAsAction="never" android:title="@string/feedbackAction" android:orderInCategory="300"></item>
-
 </menu>

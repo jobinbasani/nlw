@@ -26,6 +26,7 @@ import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -80,6 +81,10 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.shareMenuItem:
 			shareNlwDetails();
+			break;
+		case R.id.refreshNlw:
+			Toast.makeText(this, getResources().getString(R.string.refreshNotificationMessage), Toast.LENGTH_SHORT).show();
+			loadNextLongWeekend();
 			break;
 		}
 		

@@ -87,7 +87,5 @@
     <string name="title_activity_read_more">Read More</string>
     <string name="openBrowser">Open in Browser</string>
     <string name="browserChooserTitle">Select Browser</string>
-    <string name="refreshNlw">Refresh</string>
-    <string name="refreshNotificationMessage">Checking Next Long Weekend …</string>
 
 </resources>

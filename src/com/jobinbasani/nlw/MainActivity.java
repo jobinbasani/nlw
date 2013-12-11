@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	
 	SharedPreferences prefs;
 	final public static String COUNTRY_KEY = "country";
+	final public static String LAST_CHECKED = "lastChecked";
 	public static Context NLW_CONTEXT;
 	private int nlwDateNumber;
 	private String readMoreLink;
@@ -51,6 +52,7 @@ public class MainActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		EasyTracker.getInstance(this).activityStart(this);
+		checkLastLoaded();
 	}
 
 	@Override
@@ -87,6 +89,13 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	private void checkLastLoaded(){
+		int lastDate = prefs.getInt(LAST_CHECKED, 0);
+		if(lastDate>0 && (lastDate!=NlwUtil.getCurrentDateNumber())){
+			loadNextLongWeekend();
+		}
+	}
+	
 	private void loadPreferences(){
 		String defaultCountry = prefs.getString(COUNTRY_KEY, "USA");
 		Spinner countrySpinner = (Spinner) findViewById(R.id.countrySelector);
@@ -217,6 +226,10 @@ public class MainActivity extends Activity {
 			if(mShareActionProvider!=null){
 				mShareActionProvider.setShareIntent(NlwUtil.getShareDataIntent(holiday+" on "+monthName+" "+date+", "+year+" - "+holidayDetailText+". "+getResources().getString(R.string.readMoreAt)+" "+readMoreLink));
 			}
+			
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putInt(LAST_CHECKED, currentDateNumber);
+			editor.commit();
 			
 		}
 		cursor.close();

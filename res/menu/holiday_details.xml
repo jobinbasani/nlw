@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/detailsMenuOpenCalendar" android:orderInCategory="100" android:title="@string/detailsOpenCalendar" android:showAsAction="never"></item>
+    <item android:id="@+id/detailsMenuAddEvent" android:orderInCategory="200" android:title="@string/addEventAction" android:showAsAction="never"></item>
+    <item android:id="@+id/detailsMenuReadMore" android:orderInCategory="300" android:title="@string/readMore" android:showAsAction="never"></item>
+    <item android:id="@+id/detailsMenuShareAction" android:orderInCategory="400" android:title="@string/shareAction" android:showAsAction="never"></item>
+
+</menu>

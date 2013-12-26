@@ -57,4 +57,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/whiteColor" />
 
+    <ImageView
+        android:id="@+id/overflowIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/overflowDescr"
+        android:paddingRight="@dimen/nlwPadding"
+        android:src="@drawable/overflow_white" />
+
 </RelativeLayout>

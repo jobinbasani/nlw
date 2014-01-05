@@ -14,7 +14,6 @@
     <string name="dottedLineDescr">Dotted Line</string>
 
     <string-array name="nlwData">
-        <item>140101~Canada~New Year\’s Day~https://en.wikipedia.org/wiki/New_Year\'s_Day~The first day of the year on the modern Gregorian calendar</item>
         <item>140217~Canada~Family Day~https://en.wikipedia.org/wiki/Family_Day_(Canada)~A statutory holiday occurring on a Monday in February. Observed in Alberta, Ontario, PEI and Saskatchewan</item>
         <item>140418~Canada~Good Friday~https://en.wikipedia.org/wiki/Good_Friday~Commemorating the crucifixion of Jesus Christ and his death at Calvary</item>
         <item>140421~Canada~Easter Monday~https://en.wikipedia.org/wiki/Easter_Monday~Second day of the octave of Easter Week. Observed in Quebec</item>
@@ -26,7 +25,6 @@
         <item>141111~Canada~Remembrance Day~https://en.wikipedia.org/wiki/Remembrance_Day~A memorial day observed in Commonwealth countries since the end of World War I to remember the members of their armed forces who have died in the line of duty</item>
         <item>141225~Canada~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
         <item>141226~Canada~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day.Observed in Ontario</item>
-        <item>140101~USA~New Year\’s Day~https://en.wikipedia.org/wiki/New_Year\'s_Day~The first day of the year on the modern Gregorian calendar</item>
         <item>140120~USA~Birthday of Martin Luther King, Jr.~https://en.wikipedia.org/wiki/Martin_Luther_King,_Jr._Day~Observed on the third Monday of January each year, which is around the time of King\'s birthday, January 15</item>
         <item>140217~USA~Washington\’s Birthday~https://en.wikipedia.org/wiki/Washington\'s_Birthday~Celebrated on the third Monday of February in honor of George Washington, the first President of the United States</item>
         <item>140526~USA~Memorial Day~https://en.wikipedia.org/wiki/Memorial_Day~A day of remembering the men and women who died while serving in the United States Armed Forces</item>
@@ -36,7 +34,6 @@
         <item>141111~USA~Veterans Day~https://en.wikipedia.org/wiki/Veterans_Day~Honors people who have served in the U.S. Armed Forces, also known as veterans</item>
         <item>141127~USA~Thanksgiving Day~https://en.wikipedia.org/wiki/Thanksgiving~A day of giving thanks for the blessing of the harvest and of the preceding year</item>
         <item>141225~USA~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
-        <item>140101~Australia~New Year\’s Day~https://en.wikipedia.org/wiki/New_Year\'s_Day~The first day of the year on the modern Gregorian calendar</item>
         <item>140127~Australia~Australia Day~https://en.wikipedia.org/wiki/Australia_Day~The official national day of Australia, celebrated annually on 26 January, which marks the anniversary of the 1788 arrival of the First Fleet of British Ships at Sydney Cove, New South Wales, and raising of the Flag of Great Britain at that site by Governor Arthur Phillip</item>
         <item>140310~Australia~Canberra Day~https://en.wikipedia.org/wiki/Canberra_Day~A public holiday held annually on the second Monday in March in the Australian Capital Territory (ACT) to celebrate the official naming of Canberra. Observed in Australian Capital Territory.</item>
         <item>140418~Australia~Good Friday~https://en.wikipedia.org/wiki/Good_Friday~Commemorating the crucifixion of Jesus Christ and his death at Calvary</item>
@@ -47,7 +44,6 @@
         <item>141006~Australia~Labour Day~https://en.wikipedia.org/wiki/Labour_Day~Annual holiday to celebrate the achievements of workers. Observed in Australian Capital Territory, New South Wales and South Australia.</item>
         <item>141225~Australia~Christmas Day~http://en.wikipedia.org/wiki/Christmas~Annual commemoration of the birth of Jesus Christ</item>
         <item>141226~Australia~Boxing Day~http://en.wikipedia.org/wiki/Boxing_Day~The first or second weekday after Christmas Day</item>
-        <item>140101~UK~New Year\’s Day~https://en.wikipedia.org/wiki/New_Year\'s_Day~The first day of the year on the modern Gregorian calendar</item>
         <item>140418~UK~Good Friday~https://en.wikipedia.org/wiki/Good_Friday~Commemorating the crucifixion of Jesus Christ and his death at Calvary</item>
         <item>140421~UK~Easter Monday~https://en.wikipedia.org/wiki/Easter_Monday~Easter Monday in the Roman Catholic liturgical calendar is the second day of the octave of Easter Week and analogously in the Eastern Orthodox Church is the second day of Bright Week.Observed in England, Northern Ireland and Wales.</item>
         <item>140505~UK~May Day Holiday~http://en.wikipedia.org/wiki/May_Day~A traditional spring holiday and coincides with International Workers\' Day</item>

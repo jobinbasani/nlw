@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	
 	SharedPreferences prefs;
 	final public static String COUNTRY_KEY = "country";
+	final private static String DB_VERSION_KEY = "dbVersion";
 	final public static String LAST_CHECKED = "lastChecked";
 	public static Context NLW_CONTEXT;
 	private int nlwDateNumber;
@@ -44,8 +45,13 @@ public class MainActivity extends Activity {
 		NLW_CONTEXT = this;
 		
 		prefs = getPreferences(MODE_PRIVATE);
+		int dbVersion = prefs.getInt(DB_VERSION_KEY, 0);
+		if(dbVersion == NlwDataDbHelper.DATABASE_VERSION){
+			launchTasks();
+		}else{
+			new DatabaseLoaderTask().execute();
+		}
 		
-		new DatabaseLoaderTask().execute();
 	}
 
 	@Override
@@ -188,6 +194,12 @@ public class MainActivity extends Activity {
 		});
 	}
 	
+	private void launchTasks(){
+		setCountrySelectionListener();
+		setNlwDateCLickListener();
+		loadPreferences();
+	}
+	
 	private void loadNextLongWeekend() {
 		
 		TextView monthYearText = (TextView) findViewById(R.id.monthYearText);
@@ -261,9 +273,10 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			pDialog.dismiss();
-			setCountrySelectionListener();
-			setNlwDateCLickListener();
-			loadPreferences();
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putInt(DB_VERSION_KEY, NlwDataDbHelper.DATABASE_VERSION);
+			editor.commit();
+			launchTasks();
 		}
 		
 	}
